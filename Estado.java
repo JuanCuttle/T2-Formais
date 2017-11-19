@@ -28,17 +28,20 @@ public class Estado {
 		this.estadosInternos = estadosInternos;
 	}
 
-	public Character getFirst() {
+	public ArrayList<Character> getFirst() {
 		ArrayList<Character> firsts = new ArrayList<>();
 		for (Producao p : this.gramatica.getProducoesDoEstado(this.getNome())){
-			firsts.add(p.getLeitura());
-		}
-		for (Character c : firsts){
-			if (c == '&'){
-				return c;
+			//System.out.println(p.getDestino());
+			//for (Character c : p.getLeitura()){
+			for (int i = 0; i < p.getLeitura().size(); i++){
+				Character c = p.getLeitura().get(i);
+				//System.out.println(c);
+				if (!firsts.contains(c)){
+					firsts.addAll(p.getLeitura());
+				}
 			}
 		}
-		return firsts.get(0);
+		return firsts;
 	}
 
 	public GLC getGramatica() {

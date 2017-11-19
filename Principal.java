@@ -20,8 +20,8 @@ public class Principal {
 		producoes.add(new Producao(A, "&"));
 		
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
-		
-		System.out.println(producoes.get(0).getLeitura());
+		//ArrayList<Character> first = new ArrayList<>();
+		System.out.println(S.getFirst());
 		
 		Interface.mostraGramatica(g);
 		
