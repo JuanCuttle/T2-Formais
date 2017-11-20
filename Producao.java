@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class Producao {
@@ -99,6 +100,15 @@ public class Producao {
 	}
 	public void setGramatica(GLC gramatica) {
 		this.gramatica = gramatica;
+	}
+	public ArrayList<Character> getNTDestino() {
+		ArrayList<Character> ntDestino = new ArrayList<>();
+		for(Character c : this.destino.toCharArray()){
+			if((int)c <= 90 && (int) c != 38){
+				ntDestino.add(c);
+			}
+		}
+		return ntDestino;
 	}
 	
 	

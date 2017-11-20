@@ -21,7 +21,9 @@ public class Principal {
 		
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
 		//ArrayList<Character> first = new ArrayList<>();
-		System.out.println(S.getFirst());
+		//System.out.println(S.getFirst());
+		
+		GLC g1 = Interface.criarGramatica();
 		
 		Interface.mostraGramatica(g);
 		
@@ -46,5 +48,23 @@ public class Principal {
 			}
 		}
 		return false;
+	}
+	
+	public static boolean possuiProducao(ArrayList<Producao> producoes, Estado ladoEsquerdo, Estado ladoDireito) {
+		for (Producao t : producoes){
+			if (t.getOrigem().getNome().equals(ladoEsquerdo.getNome()) && t.getDestino().equals(ladoDireito.getNome())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static Producao getProducao(ArrayList<Producao> producoes, Estado ladoEsquerdo, Estado ladoDireito) {
+		for (Producao t : producoes){
+			if (t.getOrigem().getNome().equals(ladoEsquerdo.getNome()) && t.getDestino().equals(ladoDireito.getNome())){
+				return t;
+			}
+		}
+		return null;
 	}
 }
