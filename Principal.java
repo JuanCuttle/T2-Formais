@@ -9,6 +9,7 @@ public class Principal {
 		ArrayList<Character> terminais = new ArrayList<>();
 		terminais.add('a');
 		terminais.add('b');
+		terminais.add('c');
 		
 		ArrayList<Estado> naoTerminais = new ArrayList<>();
 		naoTerminais.add(S);
@@ -23,7 +24,8 @@ public class Principal {
 		//ArrayList<Character> first = new ArrayList<>();
 		//System.out.println(S.getFirst());
 		
-		GLC g1 = Interface.criarGramatica();
+		//GLC g1 = Interface.criarGramatica();
+		Interface.editarGramatica(g);
 		
 		Interface.mostraGramatica(g);
 		

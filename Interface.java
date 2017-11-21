@@ -133,6 +133,7 @@ public class Interface {
 				mais = JOptionPane.showConfirmDialog(null, "Deseja adicionar mais um símbolo terminal?");
 			}
 			
+			ArrayList<Character> aRemoverAlfabeto = new ArrayList<>();
 			int menos = JOptionPane.showConfirmDialog(null, "Deseja remover um símbolo (terminal) do alfabeto?");
 			while(menos == 0) {
 				String caracter = JOptionPane.showInputDialog("Digite o caracter (simbolo único, minusculo ou digito):");
@@ -144,23 +145,25 @@ public class Interface {
 					}
 				}
 				if (jahExiste){
-					alfabeto.remove(c);
+					aRemoverAlfabeto.add(c);
 				}
 				menos = JOptionPane.showConfirmDialog(null, "Deseja remover mais um símbolo terminal?");
 			}
+			alfabeto.removeAll(aRemoverAlfabeto);
+			
 			//System.out.println(novoAlfabeto);
 			//gramatica.setTerminais(novoAlfabeto);
-			ArrayList<Producao> aRemoverAlfabeto = new ArrayList<>();
+			ArrayList<Producao> aRemoverAlf = new ArrayList<>();
 			for (int index = 0; index < producoes.size();index++){
 				Producao trans = producoes.get(index);
 				boolean contem = false;
 				for (Character caux : trans.getDestino().toCharArray()){
-					if(alfabeto.contains(caux)){
+					if(aRemoverAlfabeto.contains(caux)){
 						contem = true;
 					}
 				}
 				if (contem){
-					aRemoverAlfabeto.add(trans);
+					aRemoverAlf.add(trans);
 				}
 			}
 			producoes.removeAll(aRemoverAlfabeto);
@@ -210,8 +213,10 @@ public class Interface {
 			ArrayList<Producao> aRemoverEstados = new ArrayList<>();
 			for (int index = 0; index < producoes.size();index++){
 				Producao trans = producoes.get(index);
+				ArrayList<Estado> ntdestino = trans.getNTDestino();
+				ArrayList<Character> tdestino = trans.getTDestino();
 				if(!naoTerminais.contains(trans.getOrigem())
-						|| naoTerminais.containsAll(trans.getNTDestino())){
+						|| !naoTerminais.containsAll(ntdestino) || !alfabeto.containsAll(tdestino)){
 					aRemoverEstados.add(trans);
 				}
 			}
