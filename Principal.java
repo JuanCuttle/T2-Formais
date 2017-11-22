@@ -5,6 +5,7 @@ public class Principal {
 	public static void main(String[] par){
 		Estado S = new Estado("S");
 		Estado A = new Estado("A");
+		Estado B = new Estado("B");
 		
 		ArrayList<Character> terminais = new ArrayList<>();
 		terminais.add('a');
@@ -14,18 +15,20 @@ public class Principal {
 		ArrayList<Estado> naoTerminais = new ArrayList<>();
 		naoTerminais.add(S);
 		naoTerminais.add(A);
+		naoTerminais.add(B);
 		
 		ArrayList<Producao> producoes = new ArrayList<>();
-		producoes.add(new Producao(S, "AbcA"));
+		producoes.add(new Producao(S, "AA"));
 		producoes.add(new Producao(A, "a"));
 		producoes.add(new Producao(A, "&"));
+		producoes.add(new Producao(B, "b"));
 		
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
 		//ArrayList<Character> first = new ArrayList<>();
-		//System.out.println(S.getFirst());
+		System.out.println(S.getFirst());
 		
 		//GLC g1 = Interface.criarGramatica();
-		Interface.editarGramatica(g);
+		//Interface.editarGramatica(g);
 		
 		Interface.mostraGramatica(g);
 		

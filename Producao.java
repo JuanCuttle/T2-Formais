@@ -23,8 +23,8 @@ public class Producao {
 		this.origem = origem;
 	}
 	public ArrayList<Character> getLeitura() {
-		ArrayList<Character> firstsAux = this.getFirst(this.destino.charAt(0));
-		//ArrayList<Character> firstsAux = this.getFirst1();
+		//ArrayList<Character> firstsAux = this.getFirst(this.destino.charAt(0));
+		ArrayList<Character> firstsAux = this.getFirst1(0);
 		//this.firsts = firstsAux;
 		return firstsAux;
 	}
@@ -67,22 +67,74 @@ public class Producao {
 		return firsts;
 	}
 	
-	public ArrayList<Character> getFirst1() {
-		int index = 0;
+	public ArrayList<Character> getFirst1(int index) {
+		ArrayList<Character> firsts1 = this.firsts;
+		//int index = 1;
+		if(this.destino.length() > index){
+			do {
+				Character firstProducao = this.destino.charAt(index);
+				int valor = (int) firstProducao;
+				//System.out.println(valor);
+				if (valor > 90 || valor == 38){
+					if (!firsts.contains(firstProducao)){
+						firsts.add(firstProducao);
+						System.out.println(firstProducao);
+					}
+					return firsts;
+				} else {
+					ArrayList<Character> firstDoEstado = gramatica.getEstadoPorNome(firstProducao.toString()).getFirst();
+					if(firstDoEstado.contains('&')){
+						//System.out.println(index);
+						if(this.destino.length() > index){
+							ArrayList<Character> aux = this.getFirst1(++index);
+							for (Character c : aux){
+								if (!firsts.contains(c)){
+									firsts.add(c);
+								}
+							}
+						}
+					}
+					for (Character c1 : firstDoEstado){
+						if (!firsts.contains(c1)){
+							firsts.add(c1);
+						}
+					}
+					//index++;
+					//firsts.addAll(firstDoEstado);
+					//System.out.println(gramatica.getEstadoPorNome(firstProducao.toString()).getFirst());
+					//return firsts;
+				}
+			}while(!firsts.containsAll(firsts1));
+		}
+		return firsts;
+	}
+	
+	public ArrayList<Character> getFirst2(int index) {
+		ArrayList<Character> firsts1 = this.firsts;
+		//int index = 1;
 		Character firstProducao = this.destino.charAt(index);
-		while((int)firstProducao <= 90 && index < this.destino.length()) {
-			firstProducao = this.destino.charAt(index);
-			if((int) firstProducao != 38){
+		do {
+			int valor = (int) firstProducao;
+			//System.out.println(valor);
+			if (valor > 90 || valor == 38){
+				if (!firsts.contains(firstProducao)){
+					firsts.add(firstProducao);
+					System.out.println(firstProducao);
+				}
+				//return firsts;
+			} else {
 				ArrayList<Character> firstDoEstado = gramatica.getEstadoPorNome(firstProducao.toString()).getFirst();
 				if(firstDoEstado.contains('&')){
+					System.out.println(index);
 					if(this.destino.length() > index){
-						ArrayList<Character> aux = this.getFirst(this.destino.charAt(index));
+						ArrayList<Character> aux = this.getFirst2(this.destino.charAt(++index));
 						for (Character c : aux){
 							if (!firsts.contains(c)){
 								firsts.add(c);
 							}
 						}
-						index++;
+					} else {
+						break;
 					}
 				}
 				for (Character c1 : firstDoEstado){
@@ -90,23 +142,12 @@ public class Producao {
 						firsts.add(c1);
 					}
 				}
-				
-			} else{
-				index++;
-			}
+				//index++;
 				//firsts.addAll(firstDoEstado);
 				//System.out.println(gramatica.getEstadoPorNome(firstProducao.toString()).getFirst());
 				//return firsts;
-		}
-		if(index < this.destino.length()){
-			int valor = (int)firstProducao;
-			if (valor > 90 || valor == 38){
-				if (!firsts.contains(firstProducao)){
-						firsts.add(firstProducao);
-						System.out.println(firstProducao);
-					}
-				}
-		}
+			}
+		}while(!firsts.containsAll(firsts1));
 		return firsts;
 	}
 /*	private void getFirstAux(ArrayList<Character> firsts, Character firstProducao) {
