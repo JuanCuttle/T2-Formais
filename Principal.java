@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 
 public class Principal {
+	
+	static ArrayList<GLC> gramaticasCriadas = new ArrayList<>();
 	public static void main(String[] par){
 		Estado S = new Estado("S");
 		Estado A = new Estado("A");
@@ -18,10 +20,11 @@ public class Principal {
 		naoTerminais.add(B);
 		
 		ArrayList<Producao> producoes = new ArrayList<>();
-		producoes.add(new Producao(S, "AA"));
+		producoes.add(new Producao(S, "ABcA"));
 		producoes.add(new Producao(A, "a"));
 		producoes.add(new Producao(A, "&"));
 		producoes.add(new Producao(B, "b"));
+		//producoes.add(new Producao(B, "&"));
 		
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
 		//ArrayList<Character> first = new ArrayList<>();

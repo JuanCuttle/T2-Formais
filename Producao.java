@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 public class Producao {
@@ -24,11 +23,11 @@ public class Producao {
 	}
 	public ArrayList<Character> getLeitura() {
 		//ArrayList<Character> firstsAux = this.getFirst(this.destino.charAt(0));
-		ArrayList<Character> firstsAux = this.getFirst1(0);
+		ArrayList<Character> firstsAux = this.getFirst(0);
 		//this.firsts = firstsAux;
 		return firstsAux;
 	}
-
+/*
 	public ArrayList<Character> getFirst(Character firstProducao) {
 		ArrayList<Character> firsts1 = this.firsts;
 		//int index = 1;
@@ -65,9 +64,9 @@ public class Producao {
 			}
 		}while(!firsts.containsAll(firsts1));
 		return firsts;
-	}
+	}*/
 	
-	public ArrayList<Character> getFirst1(int index) {
+	public ArrayList<Character> getFirst(int index) {
 		ArrayList<Character> firsts1 = this.firsts;
 		//int index = 1;
 		if(this.destino.length() > index){
@@ -78,7 +77,7 @@ public class Producao {
 				if (valor > 90 || valor == 38){
 					if (!firsts.contains(firstProducao)){
 						firsts.add(firstProducao);
-						System.out.println(firstProducao);
+						//System.out.println(firstProducao);
 					}
 					return firsts;
 				} else {
@@ -86,7 +85,7 @@ public class Producao {
 					if(firstDoEstado.contains('&')){
 						//System.out.println(index);
 						if(this.destino.length() > index){
-							ArrayList<Character> aux = this.getFirst1(++index);
+							ArrayList<Character> aux = this.getFirst(++index);
 							for (Character c : aux){
 								if (!firsts.contains(c)){
 									firsts.add(c);
@@ -108,7 +107,7 @@ public class Producao {
 		}
 		return firsts;
 	}
-	
+/*	
 	public ArrayList<Character> getFirst2(int index) {
 		ArrayList<Character> firsts1 = this.firsts;
 		//int index = 1;
@@ -149,7 +148,7 @@ public class Producao {
 			}
 		}while(!firsts.containsAll(firsts1));
 		return firsts;
-	}
+	}*/
 /*	private void getFirstAux(ArrayList<Character> firsts, Character firstProducao) {
 			int valor = (int) firstProducao;
 			//System.out.println(valor);
