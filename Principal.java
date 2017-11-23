@@ -40,6 +40,10 @@ public class Principal {
 		}*/
 	}
 	
+	public static ArrayList<Character> first(Estado estado){
+		return estado.getFirst();
+	}
+	
 	public static Estado getEstadoPorNome(String nomeE, ArrayList<Estado> estados){
 		for (Estado e : estados){
 			if(e.getNome().equalsIgnoreCase(nomeE)){

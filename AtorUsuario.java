@@ -14,6 +14,9 @@ import javax.swing.JPopupMenu;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.util.ArrayList;
+
+import javax.swing.JMenuItem;
 
 
 public class AtorUsuario extends JFrame {
@@ -78,6 +81,33 @@ public class AtorUsuario extends JFrame {
 			}
 		});
 		mnGramaticas.add(btnEditarGramtica);
+		
+		JMenu mnOperaes = new JMenu("Opera\u00E7\u00F5es");
+		menuBar.add(mnOperaes);
+		
+		JButton btnFirstestado = new JButton("First (Estado)");
+		btnFirstestado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String confirmP;
+				int i = 0;
+				String gramaticas = "";
+				for (GLC g : Principal.gramaticasCriadas){
+					gramaticas += "\nGramatica "+i+":\n";
+					gramaticas += Interface.mostraGramatica(g);
+					i++;
+				}
+				confirmP = JOptionPane.showInputDialog(null, "Selecione a gramatica:\n"+gramaticas);
+				if (!confirmP.equals("")){
+					int escolhida = Integer.parseInt(confirmP);
+					GLC gEscolhida = Principal.gramaticasCriadas.get(escolhida);
+					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o first():");
+					ArrayList<Character> first = Principal.first(Principal.getEstadoPorNome(nomeEstado, gEscolhida.getNaoTerminais()));
+					JOptionPane.showMessageDialog(null, first);
+					
+				}
+			}
+		});
+		mnOperaes.add(btnFirstestado);
 		btnEditarGramtica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
