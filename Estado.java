@@ -59,7 +59,7 @@ public class Estado {
 						continua = false;
 						int posicaoAtual = p.getDestinoArray().indexOf(aux)+deslocamento;
 						// Se o caracter posterior ao Vn na producao existe, eh Vt e nao foi adicionado ainda, adicionar
-						if(posicaoAtual+1 <= p.getDestino().length()) {
+						if(posicaoAtual+1 < p.getDestino().length()) {
 							Character proximo  = p.getDestinoArray().get(posicaoAtual+1);
 							//System.out.println(proximo);
 							if ((int) proximo > 90 && !follow.contains(proximo)){
@@ -82,6 +82,13 @@ public class Estado {
 								} else{
 									//follow.remove(new Character('&'));
 									break;
+								}
+							}
+						} else if (posicaoAtual+1 == p.getDestino().length()){
+							ArrayList<Character> followProximo = this.getGramatica().getEstadoPorNome(p.getOrigem().getNome()).getFollow();
+							for (Character fp2 : followProximo){
+								if(!follow.contains(fp2)){
+									follow.add(fp2);
 								}
 							}
 						}
