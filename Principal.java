@@ -20,6 +20,7 @@ public class Principal {
 		naoTerminais.add(B);
 		
 		ArrayList<Producao> producoes = new ArrayList<>();
+		//producoes.add(new Producao(S, "ABcA"));
 		producoes.add(new Producao(S, "ABcA"));
 		producoes.add(new Producao(A, "a"));
 		producoes.add(new Producao(A, "&"));
@@ -28,7 +29,10 @@ public class Principal {
 		
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
 		//ArrayList<Character> first = new ArrayList<>();
-		System.out.println(S.getFirst());
+		
+		//System.out.println(S.getFirst());
+		
+		System.out.println(A.getFollow());
 		
 		//GLC g1 = Interface.criarGramatica();
 		//Interface.editarGramatica(g);

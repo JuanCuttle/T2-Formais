@@ -43,6 +43,56 @@ public class Estado {
 		}
 		return firsts;
 	}
+	
+	public ArrayList<Character> getFollow(){
+		ArrayList<Character> follow = new ArrayList<>();
+		Character c = this.getNome().charAt(0);
+		
+		for(Producao p : this.getGramatica().getProducoes()){
+			
+			for(Character aux : p.getDestinoArray()){
+				// Se o estado eh produzido nesta producao, verificar o que vem depois dele
+				if(aux == c){
+					boolean continua = false;
+					int deslocamento = 0;
+					do {
+						continua = false;
+						int posicaoAtual = p.getDestinoArray().indexOf(aux)+deslocamento;
+						// Se o caracter posterior ao Vn na producao existe, eh Vt e nao foi adicionado ainda, adicionar
+						if(posicaoAtual+1 <= p.getDestino().length()) {
+							Character proximo  = p.getDestinoArray().get(posicaoAtual+1);
+							//System.out.println(proximo);
+							if ((int) proximo > 90 && !follow.contains(proximo)){
+								follow.add(proximo);
+								//follow.remove(new Character('&'));
+								break;
+							} else if((int) proximo <= 90){
+								// Se o caracter posterior ao Vn na producao existe, e eh Vn, adicionar seus first ao follow
+								ArrayList<Character> firstsProximo = this.getGramatica().getEstadoPorNome(proximo.toString()).getFirst();
+								for (Character fp : firstsProximo){
+									if(!follow.contains(fp)){
+										follow.add(fp);
+									}
+								}
+								// Se o caracter posterior ao Vn na producao pode ser '&', pegar o proximo ainda
+								if (follow.contains('&')){
+									continua = true;
+									deslocamento++;
+									//follow.remove(new Character('&'));
+								} else{
+									//follow.remove(new Character('&'));
+									break;
+								}
+							}
+						}
+					} while(continua == true);
+				}
+			}
+		}
+		
+		
+		return follow;
+	}
 
 	public GLC getGramatica() {
 		return gramatica;
