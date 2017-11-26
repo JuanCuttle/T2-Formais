@@ -21,7 +21,7 @@ public class Principal {
 		
 		ArrayList<Producao> producoes = new ArrayList<>();
 		//producoes.add(new Producao(S, "ABcA"));
-		producoes.add(new Producao(S, "AcA"));
+		producoes.add(new Producao(S, "AAcA"));
 		producoes.add(new Producao(A, "a"));
 		producoes.add(new Producao(A, "&"));
 		producoes.add(new Producao(B, "b"));
@@ -46,6 +46,10 @@ public class Principal {
 	
 	public static ArrayList<Character> first(Estado estado){
 		return estado.getFirst();
+	}
+	
+	public static ArrayList<Character> follow(Estado estado){
+		return estado.getFollow();
 	}
 	
 	public static Estado getEstadoPorNome(String nomeE, ArrayList<Estado> estados){

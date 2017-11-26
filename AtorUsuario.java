@@ -108,6 +108,30 @@ public class AtorUsuario extends JFrame {
 			}
 		});
 		mnOperaes.add(btnFirstestado);
+		
+		JButton btnFollowestado = new JButton("Follow (Estado)");
+		btnFollowestado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String confirmP;
+				int i = 0;
+				String gramaticas = "";
+				for (GLC g : Principal.gramaticasCriadas){
+					gramaticas += "\nGramatica "+i+":\n";
+					gramaticas += Interface.mostraGramatica(g);
+					i++;
+				}
+				confirmP = JOptionPane.showInputDialog(null, "Selecione a gramatica:\n"+gramaticas);
+				if (!confirmP.equals("")){
+					int escolhida = Integer.parseInt(confirmP);
+					GLC gEscolhida = Principal.gramaticasCriadas.get(escolhida);
+					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o follow():");
+					ArrayList<Character> follow = Principal.follow(Principal.getEstadoPorNome(nomeEstado, gEscolhida.getNaoTerminais()));
+					JOptionPane.showMessageDialog(null, follow);
+					
+				}
+			}
+		});
+		mnOperaes.add(btnFollowestado);
 		btnEditarGramtica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
