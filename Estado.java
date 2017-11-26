@@ -6,7 +6,7 @@ public class Estado {
 	private GLC gramatica;
 	
 	private String nome;
-	private ArrayList<Estado> estadosInternos = new ArrayList<>();
+	//private ArrayList<Estado> estadosInternos = new ArrayList<>();
 	
 	public Estado (String nome){
 		this.setNome(nome);
@@ -20,13 +20,13 @@ public class Estado {
 		this.nome = nome;
 	}
 
-	public ArrayList<Estado> getEstadosInternos() {
+/*	public ArrayList<Estado> getEstadosInternos() {
 		return estadosInternos;
 	}
 
 	public void setEstadosInternos(ArrayList<Estado> estadosInternos) {
 		this.estadosInternos = estadosInternos;
-	}
+	}*/
 
 	public ArrayList<Character> getFirst() {
 		ArrayList<Character> firsts = new ArrayList<>();
@@ -48,6 +48,9 @@ public class Estado {
 		ArrayList<Character> follow = new ArrayList<>();
 		Character c = this.getNome().charAt(0);
 		
+		if (this.getGramatica().getInicial() == this){
+			follow.add(new Character('$'));
+		}
 		for(Producao p : this.getGramatica().getProducoes()){
 			
 			for(Character aux : p.getDestinoArray()){
@@ -64,7 +67,7 @@ public class Estado {
 							//System.out.println(proximo);
 							if ((int) proximo > 90 && !follow.contains(proximo)){
 								follow.add(proximo);
-								//follow.remove(new Character('&'));
+								follow.remove(new Character('&'));
 								break;
 							} else if((int) proximo <= 90){
 								// Se o caracter posterior ao Vn na producao existe, e eh Vn, adicionar seus first ao follow
@@ -78,6 +81,8 @@ public class Estado {
 								if (follow.contains('&')){
 									continua = true;
 									deslocamento++;
+									
+									
 									//follow.remove(new Character('&'));
 								} else{
 									//follow.remove(new Character('&'));
@@ -95,6 +100,8 @@ public class Estado {
 					} while(continua == true);
 				}
 			}
+			// Faz sentido ter epsilon no follow?
+			follow.remove(new Character('&'));
 		}
 		
 		

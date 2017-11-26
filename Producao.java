@@ -8,6 +8,7 @@ public class Producao {
 	private String destino;
 	
 	ArrayList<Character> firsts;
+	boolean pegouFirst = false;
 	
 	public Producao(Estado origem, String destino) {
 		super();
@@ -23,9 +24,14 @@ public class Producao {
 	}
 	public ArrayList<Character> getLeitura() {
 		//ArrayList<Character> firstsAux = this.getFirst(this.destino.charAt(0));
-		ArrayList<Character> firstsAux = this.getFirst(0);
+		if (!pegouFirst){
+			this.firsts = this.getFirst(0);
+			pegouFirst = true;
+			return this.firsts;
+		} else {
+			return this.firsts;
+		}
 		//this.firsts = firstsAux;
-		return firstsAux;
 	}
 /*
 	public ArrayList<Character> getFirst(Character firstProducao) {
@@ -93,11 +99,19 @@ public class Producao {
 							}
 						}
 					}
+					
 					for (Character c1 : firstDoEstado){
 						if (!firsts.contains(c1)){
 							firsts.add(c1);
 						}
 					}
+					
+					// Se o ultimo for Vn, e possuir epsilon-transicao, adicionar epsilon. Senao, remover
+					if (index != this.getDestino().length()-1){
+						firsts.remove(new Character('&'));
+					}
+					
+					
 					//index++;
 					//firsts.addAll(firstDoEstado);
 					//System.out.println(gramatica.getEstadoPorNome(firstProducao.toString()).getFirst());
