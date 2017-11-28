@@ -89,7 +89,7 @@ public class Producao {
 						//System.out.println(firstProducao);
 					}
 					return firsts;
-				} else {
+				} else if (firstProducao != this.origem.getNome().charAt(0)){
 					ArrayList<Character> firstDoEstado = gramatica.getEstadoPorNome(firstProducao.toString()).getFirst();
 					if(firstDoEstado.contains('&')){
 						//System.out.println(index);
@@ -249,7 +249,7 @@ public class Producao {
 				//System.out.println(valor);
 				if (valor > 90 || valor == 38){
 					return firstsNT;
-				} else {
+				} else if (firstProducao != this.origem.getNome().charAt(0)){
 					if (!firstsNT.contains(firstProducao)){
 						firstsNT.add(firstProducao);
 						//System.out.println(firstProducao);

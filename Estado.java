@@ -135,6 +135,7 @@ public class Estado {
 		for(Producao p : this.getGramatica().getProducoes()){
 			
 			for(Character aux : p.getDestinoArray()){
+				//ArrayList<Character> auxiliar = (ArrayList<Character>) p.getDestinoArray().clone();
 				// Se o estado eh produzido nesta producao, verificar o que vem depois dele
 				if(aux == c){
 					boolean continua = false;
@@ -149,6 +150,15 @@ public class Estado {
 							if ((int) proximo > 90 && !followNT.contains(proximo)){
 								//follow.add(proximo);
 								//follow.remove(new Character('&'));
+/*								auxiliar.remove(0);
+								System.out.println(auxiliar);
+								
+								if (auxiliar.contains(this.getNome().toCharArray())) {
+									continua = true;
+									deslocamento++;
+								} else {
+									break;
+								}*/
 								break;
 							} else if((int) proximo <= 90){
 								if (!followNT.contains(proximo)){
@@ -163,7 +173,12 @@ public class Estado {
 									}
 								}
 								ArrayList<Character> firstsTProximo = this.getGramatica().getEstadoPorNome(proximo.toString()).getFirst();
+								
+								
+								//auxiliar.remove(0);
+								//System.out.println(auxiliar);
 								// Se o caracter posterior ao Vn na producao pode ser '&', pegar o proximo ainda
+								//if (firstsTProximo.contains('&') || auxiliar.contains(this.getNome().toCharArray())){
 								if (firstsTProximo.contains('&')){
 									continua = true;
 									deslocamento++;
