@@ -44,6 +44,23 @@ public class Estado {
 		return firsts;
 	}
 	
+	public ArrayList<Character> getFirstNT(){
+		ArrayList<Character> firsts = new ArrayList<>();
+		for (Producao p : this.gramatica.getProducoesDoEstado(this.getNome())){
+			//System.out.println(p.getDestino());
+			//for (Character c : p.getLeitura()){
+			ArrayList<Character> firstNT = p.getFirstNT(0);
+			for (int i = 0; i < firstNT.size(); i++){
+				Character c = firstNT.get(i);
+				//System.out.println(c);
+				if (!firsts.contains(c)){
+					firsts.addAll(firstNT);
+				}
+			}
+		}
+		return firsts;
+	}
+	
 	public ArrayList<Character> getFollow(){
 		ArrayList<Character> follow = new ArrayList<>();
 		Character c = this.getNome().charAt(0);

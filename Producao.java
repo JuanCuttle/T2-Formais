@@ -9,12 +9,15 @@ public class Producao {
 	
 	ArrayList<Character> firsts;
 	boolean pegouFirst = false;
+
+	private ArrayList<Character> firstsNT;
 	
 	public Producao(Estado origem, String destino) {
 		super();
 		this.origem = origem;
 		this.destino = destino;
 		this.firsts = new ArrayList<>();
+		this.firstsNT = new ArrayList<>();
 	}
 	public Estado getOrigem() {
 		return origem;
@@ -234,6 +237,56 @@ public class Producao {
 			array.add(c);
 		}
 		return array;
+	}
+	public ArrayList<Character> getFirstNT(int index) {
+		ArrayList<Character> firsts1 = this.firstsNT;
+		//int index = 1;
+		if(this.destino.length() > index){
+			do {
+				Character firstProducao = this.destino.charAt(index);
+				//System.out.println(firstProducao);
+				int valor = (int) firstProducao;
+				//System.out.println(valor);
+				if (valor > 90 || valor == 38){
+					return firstsNT;
+				} else {
+					if (!firstsNT.contains(firstProducao)){
+						firstsNT.add(firstProducao);
+						//System.out.println(firstProducao);
+					}
+					ArrayList<Character> firstDoEstado = gramatica.getEstadoPorNome(firstProducao.toString()).getFirst();
+					if(firstDoEstado.contains('&')){
+						//System.out.println(index);
+						if(this.destino.length() > index){
+							ArrayList<Character> aux = this.getFirstNT(++index);
+							for (Character c : aux){
+								if (!firstsNT.contains(c)){
+									firstsNT.add(c);
+								}
+							}
+						}
+					}
+/*					
+					for (Character c1 : firstDoEstado){
+						if (!firstsNT.contains(c1)){
+							firstsNT.add(c1);
+						}
+					}*/
+					
+/*					// Se o ultimo for Vn, e possuir epsilon-transicao, adicionar epsilon. Senao, remover
+					if (index != this.getDestino().length()-1){
+						firstsNT.remove(new Character('&'));
+					}*/
+					
+					
+					//index++;
+					//firsts.addAll(firstDoEstado);
+					//System.out.println(gramatica.getEstadoPorNome(firstProducao.toString()).getFirst());
+					//return firsts;
+				}
+			}while(!firstsNT.containsAll(firsts1));
+		}
+		return firstsNT;
 	}
 
 	

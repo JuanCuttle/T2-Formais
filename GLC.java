@@ -65,6 +65,26 @@ public class GLC {
 		}
 		return prod;
 	}
+	
+	public void fatorar(){
+		for (Producao p : this.getProducoes()){
+			for (Estado e : this.getNaoTerminais()){
+				if (p.getOrigem() == e){
+					ArrayList<Character> first = p.getLeitura();
+					for (Producao p2 : this.getProducoes()){
+						if (p2.getOrigem() == e){
+							ArrayList<Character> first2 = p2.getLeitura();
+							for (Character c : first){
+								if (first2.contains(c)){
+									boolean naoFatorada = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 
 }
