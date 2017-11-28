@@ -32,7 +32,7 @@ public class Principal {
 		
 		//System.out.println(S.getFirstNT());
 		
-		//System.out.println(A.getFollow());
+		//System.out.println(A.getFollowNT());
 		
 		//GLC g1 = Interface.criarGramatica();
 		//Interface.editarGramatica(g);

@@ -124,6 +124,75 @@ public class Estado {
 		
 		return follow;
 	}
+	
+	public ArrayList<Character> getFollowNT(){
+		ArrayList<Character> followNT = new ArrayList<>();
+		Character c = this.getNome().charAt(0);
+		
+		if (this.getGramatica().getInicial() == this){
+			followNT.add(new Character('$'));
+		}
+		for(Producao p : this.getGramatica().getProducoes()){
+			
+			for(Character aux : p.getDestinoArray()){
+				// Se o estado eh produzido nesta producao, verificar o que vem depois dele
+				if(aux == c){
+					boolean continua = false;
+					int deslocamento = 0;
+					do {
+						continua = false;
+						int posicaoAtual = p.getDestinoArray().indexOf(aux)+deslocamento;
+						// Se o caracter posterior ao Vn na producao existe, eh Vt e nao foi adicionado ainda, adicionar
+						if(posicaoAtual+1 < p.getDestino().length()) {
+							Character proximo  = p.getDestinoArray().get(posicaoAtual+1);
+							//System.out.println(proximo);
+							if ((int) proximo > 90 && !followNT.contains(proximo)){
+								//follow.add(proximo);
+								//follow.remove(new Character('&'));
+								break;
+							} else if((int) proximo <= 90){
+								if (!followNT.contains(proximo)){
+									followNT.add(proximo);
+									//System.out.println(firstProducao);
+								}
+								// Se o caracter posterior ao Vn na producao existe, e eh Vn, adicionar seus first ao follow
+								ArrayList<Character> firstsProximo = this.getGramatica().getEstadoPorNome(proximo.toString()).getFirstNT();
+								for (Character fp : firstsProximo){
+									if(!followNT.contains(fp)){
+										followNT.add(fp);
+									}
+								}
+								ArrayList<Character> firstsTProximo = this.getGramatica().getEstadoPorNome(proximo.toString()).getFirst();
+								// Se o caracter posterior ao Vn na producao pode ser '&', pegar o proximo ainda
+								if (firstsTProximo.contains('&')){
+									continua = true;
+									deslocamento++;
+									
+									
+									//follow.remove(new Character('&'));
+								} else{
+									//follow.remove(new Character('&'));
+									break;
+								}
+							}
+						} else if (posicaoAtual+1 == p.getDestino().length()){
+							ArrayList<Character> followProximo = this.getGramatica().getEstadoPorNome(p.getOrigem().getNome()).getFollowNT();
+							for (Character fp2 : followProximo){
+								if(!followNT.contains(fp2)){
+									followNT.add(fp2);
+								}
+							}
+						}
+					} while(continua == true);
+				}
+			}
+			// Faz sentido ter epsilon no follow?
+			followNT.remove(new Character('&'));
+		}
+		
+		
+		return followNT;
+	}
 
 	public GLC getGramatica() {
 		return gramatica;
