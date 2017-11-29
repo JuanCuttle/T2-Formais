@@ -8,7 +8,7 @@ public class Principal {
 		Estado S = new Estado("S");
 		Estado A = new Estado("A");
 		Estado B = new Estado("B");
-		Estado C = new Estado("C");
+		//Estado C = new Estado("C");
 		
 		ArrayList<Character> terminais = new ArrayList<>();
 		terminais.add('a');
@@ -19,11 +19,11 @@ public class Principal {
 		naoTerminais.add(S);
 		naoTerminais.add(A);
 		naoTerminais.add(B);
-		naoTerminais.add(C);
+		//naoTerminais.add(C);
 		
 		ArrayList<Producao> producoes = new ArrayList<>();
 		//producoes.add(new Producao(S, "ABcA"));
-		producoes.add(new Producao(S, "ABcA"));
+		producoes.add(new Producao(S, "AcAb"));
 		//producoes.add(new Producao(S, "AAbA"));
 		producoes.add(new Producao(A, "a"));
 		producoes.add(new Producao(A, "&"));
@@ -34,7 +34,7 @@ public class Principal {
 		
 		//System.out.println(S.getFirstNT());
 		
-		System.out.println(A.getFollowNT());
+		System.out.println(A.getFollow());
 		
 		//GLC g1 = Interface.criarGramatica();
 		//Interface.editarGramatica(g);

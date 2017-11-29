@@ -85,7 +85,9 @@ public class Estado {
 							if ((int) proximo > 90 && !follow.contains(proximo)){
 								follow.add(proximo);
 								follow.remove(new Character('&'));
-								break;
+								//break;
+								continua = true;
+								deslocamento++;
 							} else if((int) proximo <= 90){
 								// Se o caracter posterior ao Vn na producao existe, e eh Vn, adicionar seus first ao follow
 								ArrayList<Character> firstsProximo = this.getGramatica().getEstadoPorNome(proximo.toString()).getFirst();
@@ -103,7 +105,7 @@ public class Estado {
 									//follow.remove(new Character('&'));
 								} else{
 									//follow.remove(new Character('&'));
-									break;
+									//break;
 								}
 							}
 						} else if (posicaoAtual+1 == p.getDestino().length()){
