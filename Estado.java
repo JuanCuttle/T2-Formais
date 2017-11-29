@@ -159,7 +159,9 @@ public class Estado {
 								} else {
 									break;
 								}*/
-								break;
+								//break;
+								continua = true;
+								deslocamento++;
 							} else if((int) proximo <= 90){
 								if (!followNT.contains(proximo)){
 									followNT.add(proximo);
@@ -186,8 +188,7 @@ public class Estado {
 									
 									//follow.remove(new Character('&'));
 								} else{
-									//follow.remove(new Character('&'));
-									break;
+									//break;
 								}
 							}
 						} else if (posicaoAtual+1 == p.getDestino().length()){
