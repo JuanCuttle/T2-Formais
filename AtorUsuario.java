@@ -141,7 +141,7 @@ public class AtorUsuario extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//Principal.gramaticasCriadas.add(Interface.criarGramatica());
 				
-				String entrada = JOptionPane.showInputDialog("Digite a gramatica: ");
+				String entrada = JOptionPane.showInputDialog("Digite a gramatica (colocar virgulas entre os nao-terminais, exemplo: S-aA | bB, A->a): ");
 				Principal.gramaticasCriadas.add(Interface.criaGramaticaParse(entrada));
 			}
 		});

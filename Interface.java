@@ -6,7 +6,7 @@ public class Interface {
 
 	// Gera uma string para faciliar a visualizacao de uma gramatica
 	public static String mostraGramatica(GLC g) {
-		String gram = "";
+		String gram = "Gramatica: \n";
 		for (Estado e : g.getNaoTerminais()) {
 			if (g.getInicial() == e){
 				gram = gram + "*";
@@ -27,7 +27,7 @@ public class Interface {
 			gram = gram + "\n";
 			System.out.println("");
 		}
-		// JOptionPane.showMessageDialog(null, gram);
+		JOptionPane.showMessageDialog(null, gram);
 		gram = gram + "\n";
 		System.out.println("");
 		return gram;
@@ -356,17 +356,19 @@ public class Interface {
 				i++;
 			}while(i < auxiliar.size());
 			
-			String inicialS = JOptionPane.showInputDialog("Digite o nome do estado inicial: ");
+			String inicialS = "";
 			Estado inicial = null;
 			do {
-				if (inicialS != null){
+				inicialS = JOptionPane.showInputDialog("Digite o nome do estado inicial: ");
+				if (inicialS != null && inicialS != ""){
 					inicial = Principal.getEstadoPorNome(inicialS, naoTerminaisAux);
 				}
-			}while(inicial == null);
+				
+			}while(inicial == null || inicialS == "");
 			System.out.println(inicial.getNome());
 			
 			GLC gramatica = new GLC(naoTerminaisAux, terminaisAux, producoesAux, inicial);
-			
+			Interface.mostraGramatica(gramatica);
 			return gramatica;
 		}
 }
