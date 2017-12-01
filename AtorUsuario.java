@@ -139,7 +139,10 @@ public class AtorUsuario extends JFrame {
 		});
 		btnCriarGramtica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Principal.gramaticasCriadas.add(Interface.criarGramatica());
+				//Principal.gramaticasCriadas.add(Interface.criarGramatica());
+				
+				String entrada = JOptionPane.showInputDialog("Digite a gramatica: ");
+				Principal.gramaticasCriadas.add(Interface.criaGramaticaParse(entrada));
 			}
 		});
 	}

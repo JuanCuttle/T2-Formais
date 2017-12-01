@@ -280,4 +280,93 @@ public class Interface {
 				nt.getEstadosInternos().add(nt);
 			}	*/	
 		}
+		
+	public static GLC criaGramaticaParse(String entrada){
+			ArrayList<Character> auxiliar = new ArrayList<>();
+			for (Character c : entrada.toCharArray()){
+				if((int)c != 32){
+					auxiliar.add(c);
+				}
+			}
+			
+			ArrayList<Estado> naoTerminaisAux = new ArrayList<>();
+			ArrayList<Character> terminaisAux = new ArrayList<>();
+			ArrayList<Producao> producoesAux = new ArrayList<>();
+			int i = 0;
+			do{
+				Character aux = auxiliar.get(i);
+				if (i+1 < auxiliar.size() && auxiliar.get(i+1) == '-'){
+					if (Principal.getEstadoPorNome(aux.toString(), naoTerminaisAux) == null){
+						Estado e = new Estado(aux.toString());
+						naoTerminaisAux.add(e);
+					}
+				} else if(aux == '>' || aux == '|'){
+					int r = i;
+					Character retorno = auxiliar.get(r);
+					do{
+						r--;
+						retorno = auxiliar.get(r);
+					}while(retorno != '-');
+					retorno = auxiliar.get(r-1);
+					//System.out.println(retorno);
+					
+					int j = 1;
+					String destino = "";
+					while(auxiliar.get(i+j) != '|' && auxiliar.get(i+j) != ',' && i+j < auxiliar.size()-1){
+						Character aux2 = auxiliar.get(i+j);
+						//System.out.println(aux2);
+						destino += aux2.toString();
+						if((int)aux2 <= 90 && (int) aux2 != 38){
+							if (Principal.getEstadoPorNome(aux2.toString(), naoTerminaisAux) == null){
+								naoTerminaisAux.add(new Estado(aux2.toString()));
+							}
+						} else{
+							if (!terminaisAux.contains(aux2)){
+								terminaisAux.add(aux2);
+							}
+						}
+						j++;
+					}
+					
+					if (i+j == auxiliar.size()-1){
+						Character aux2 = auxiliar.get(i+j);
+						//System.out.println(aux2);
+						destino += aux2.toString();
+						if((int)aux2 <= 90 && (int) aux2 != 38){
+							if (Principal.getEstadoPorNome(aux2.toString(), naoTerminaisAux) == null){
+								naoTerminaisAux.add(new Estado(aux2.toString()));
+							}
+						} else{
+							if (!terminaisAux.contains(aux2)){
+								terminaisAux.add(aux2);
+							}
+						}
+					}
+					
+					Estado origem =  Principal.getEstadoPorNome(retorno.toString(), naoTerminaisAux);
+					if (!Principal.possuiProducao1(producoesAux, origem, destino)){
+						Producao p = new Producao(origem, destino);
+						producoesAux.add(p);
+					}
+					//System.out.println(destino);
+					
+					//System.out.println(producoesAux.get(0).getOrigem().getNome()+" -> "+ producoesAux.get(0).getDestino());
+					//break;
+				}
+				i++;
+			}while(i < auxiliar.size());
+			
+			String inicialS = JOptionPane.showInputDialog("Digite o nome do estado inicial: ");
+			Estado inicial = null;
+			do {
+				if (inicialS != null){
+					inicial = Principal.getEstadoPorNome(inicialS, naoTerminaisAux);
+				}
+			}while(inicial == null);
+			System.out.println(inicial.getNome());
+			
+			GLC gramatica = new GLC(naoTerminaisAux, terminaisAux, producoesAux, inicial);
+			
+			return gramatica;
+		}
 }

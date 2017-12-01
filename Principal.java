@@ -32,14 +32,29 @@ public class Principal {
 		
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
 		
+		
+		String string = "S -> AcAb, A-> a | &, B -> b";
 		//System.out.println(S.getFirstNT());
 		
-		System.out.println(A.getFollow());
+		//System.out.println(A.getFollow());
+
+
+/*		for (Estado e : naoTerminaisAux){
+			System.out.println(e.getNome());
+		}*/
+		
+/*		for (Character car : terminaisAux){
+			System.out.println(car);
+		}*/
+		
+/*		for (Producao p : producoesAux){
+			System.out.println(p.getOrigem().getNome()+" -> "+p.getDestino());
+		}*/
 		
 		//GLC g1 = Interface.criarGramatica();
 		//Interface.editarGramatica(g);
 		
-		Interface.mostraGramatica(g);
+		//Interface.mostraGramatica(g);
 		
 /*		for (Character c : "abcABCXYZ".toCharArray()){
 			System.out.println((int)c);
@@ -48,6 +63,16 @@ public class Principal {
 		
 	}
 	
+	public static boolean possuiProducao1(ArrayList<Producao> producoesAux,
+			Estado estadoPorNome, String destino) {
+		for (Producao p : producoesAux){
+			if (p.getOrigem() == estadoPorNome && p.getDestino().equals(destino)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static ArrayList<Character> first(Estado estado){
 		return estado.getFirst();
 	}
