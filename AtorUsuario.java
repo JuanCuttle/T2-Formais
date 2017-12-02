@@ -148,7 +148,7 @@ public class AtorUsuario extends JFrame {
 				if (!confirmP.equals("")){
 					int escolhida = Integer.parseInt(confirmP);
 					GLC gEscolhida = Principal.gramaticasCriadas.get(escolhida);
-					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o first():");
+					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o firstNT():");
 					ArrayList<Character> firstNT = Principal.firstNT(Principal.getEstadoPorNome(nomeEstado, gEscolhida.getNaoTerminais()));
 					JOptionPane.showMessageDialog(null, firstNT);
 					
@@ -172,7 +172,7 @@ public class AtorUsuario extends JFrame {
 				if (!confirmP.equals("")){
 					int escolhida = Integer.parseInt(confirmP);
 					GLC gEscolhida = Principal.gramaticasCriadas.get(escolhida);
-					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o follow():");
+					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o followNT():");
 					ArrayList<Character> followNT = Principal.followNT(Principal.getEstadoPorNome(nomeEstado, gEscolhida.getNaoTerminais()));
 					JOptionPane.showMessageDialog(null, followNT);
 					

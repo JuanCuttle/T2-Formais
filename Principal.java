@@ -33,7 +33,7 @@ public class Principal {
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
 		
 		
-		String string = "S -> AcA, A-> a | &, B -> b";
+		String string = "S -> AcAB, A-> a | &, B -> b";
 		//System.out.println(S.getFirst());
 		
 		//System.out.println(A.getFollow());
