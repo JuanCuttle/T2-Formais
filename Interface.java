@@ -33,6 +33,35 @@ public class Interface {
 		return gram;
 	}
 	
+	public static String mostraGramaticaParse(GLC g) {
+		String gram = "";
+		for (Estado e : g.getNaoTerminais()) {
+/*			if (g.getInicial() == e){
+				gram = gram + "*";
+				System.out.print("*");
+			}*/
+			gram = gram + e.getNome() + " -> ";
+			System.out.print(e.getNome() + " -> ");
+			for (Producao p : g.getProducoes()) {
+				if (p.getOrigem() == e) {
+					// Para cada transicao do estado, imprimir ela e " | "
+					gram = gram + p.getDestino() + " | ";
+					System.out.print(p.getDestino() + " | ");
+				}
+			}
+			gram = gram.substring(0, gram.length()-3);
+			// Terminaram as transicoes, imprime nova linha e reinicia o
+			// processo no
+			// proximo estado
+			gram = gram + ", ";
+			System.out.print(", ");
+		}
+		//JOptionPane.showMessageDialog(null, gram);
+		gram = gram.substring(0, gram.length()-2);
+		System.out.print("");
+		return gram;
+	}
+	
 	// Permite que o usuario interaja com o modelo, para construir uma gramatica nova
 		public static GLC criarGramatica(){
 			GLC g = null;
@@ -371,4 +400,9 @@ public class Interface {
 			Interface.mostraGramatica(gramatica);
 			return gramatica;
 		}
+	
+	public static String editaGramaticaParse(String gram){
+		String gramNova = JOptionPane.showInputDialog("Edite a gramatica: ", gram);
+		return gramNova;
+	}
 }

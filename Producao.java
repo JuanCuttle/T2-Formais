@@ -12,6 +12,8 @@ public class Producao {
 
 	private ArrayList<Character> firstsNT;
 	
+	private ArrayList<Character> jahPassou = new ArrayList<>();
+	
 	public Producao(Estado origem, String destino) {
 		super();
 		this.origem = origem;
@@ -35,6 +37,7 @@ public class Producao {
 			return this.firsts;
 		}
 		//this.firsts = firstsAux;
+		//return this.firsts;
 	}
 /*
 	public ArrayList<Character> getFirst(Character firstProducao) {
@@ -82,14 +85,15 @@ public class Producao {
 			do {
 				Character firstProducao = this.destino.charAt(index);
 				int valor = (int) firstProducao;
-				//System.out.println(valor);
+				System.out.println(firstProducao);
 				if (valor > 90 || valor == 38){
 					if (!firsts.contains(firstProducao)){
 						firsts.add(firstProducao);
 						//System.out.println(firstProducao);
 					}
 					//return firsts;
-				} else if (firstProducao != this.origem.getNome().charAt(0)){
+				} else if (firstProducao != this.origem.getNome().charAt(0) && !this.jahPassou.contains(firstProducao)){
+					this.jahPassou.add(firstProducao);
 					ArrayList<Character> firstDoEstado = gramatica.getEstadoPorNome(firstProducao.toString()).getFirst();
 					if(firstDoEstado.contains('&')){
 						//System.out.println(index);

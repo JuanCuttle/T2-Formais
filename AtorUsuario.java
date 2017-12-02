@@ -75,7 +75,13 @@ public class AtorUsuario extends JFrame {
 				confirmP = JOptionPane.showInputDialog(null, "Deseja editar qual gramatica?\n"+gramaticas);
 				if (!confirmP.equals("")){
 					int escolhida = Integer.parseInt(confirmP);
-					Interface.editarGramatica(Principal.gramaticasCriadas.get(escolhida));
+					//Interface.editarGramatica(Principal.gramaticasCriadas.get(escolhida));
+					
+					GLC gramatica = Principal.gramaticasCriadas.get(escolhida);
+					String gramaticaString = Interface.mostraGramaticaParse(gramatica);
+					String gramaticaStringNova = Interface.editaGramaticaParse(gramaticaString);
+					Principal.gramaticasCriadas.remove(escolhida);
+					Principal.gramaticasCriadas.add(Interface.criaGramaticaParse(gramaticaStringNova));
 					
 				}
 			}

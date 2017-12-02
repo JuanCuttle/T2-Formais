@@ -34,6 +34,10 @@ public class Principal {
 		
 		
 		String string = "S -> AcAB, A-> a | &, B -> b";
+		String string2 = "S -> AC | CeB | Ba, A -> aA | BC, B -> bB | AB | &, C -> cC | &";
+		
+		//System.out.println(Interface.editaGramaticaParse(string));
+		
 		//System.out.println(S.getFirst());
 		
 		//System.out.println(A.getFollow());

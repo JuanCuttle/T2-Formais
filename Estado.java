@@ -8,6 +8,8 @@ public class Estado {
 	private String nome;
 	//private ArrayList<Estado> estadosInternos = new ArrayList<>();
 	
+	private ArrayList<Character> jahPassou = new ArrayList<>();
+	
 	public Estado (String nome){
 		this.setNome(nome);
 	}
@@ -37,7 +39,8 @@ public class Estado {
 				Character c = p.getLeitura().get(i);
 				//System.out.println(c);
 				if (!firsts.contains(c)){
-					firsts.addAll(p.getLeitura());
+					//firsts.addAll(p.getLeitura());
+					firsts.add(c);
 				}
 			}
 		}
@@ -54,7 +57,8 @@ public class Estado {
 				Character c = firstNT.get(i);
 				//System.out.println(c);
 				if (!firsts.contains(c)){
-					firsts.addAll(firstNT);
+					//firsts.addAll(firstNT);
+					firsts.add(c);
 				}
 			}
 		}
@@ -107,7 +111,8 @@ public class Estado {
 									}
 								}
 								// Se o caracter posterior ao Vn na producao pode ser '&', pegar o proximo ainda
-								if (follow.contains('&')){
+								//if (follow.contains('&')){
+								if (firstsProximo.contains('&')){
 									continua = true;
 									deslocamento++;
 									
@@ -118,7 +123,9 @@ public class Estado {
 									//break;
 								}
 							}
-						} else if (posicaoAtual+1 == p.getDestino().length()){
+						} else if (posicaoAtual+1 >= p.getDestino().length() && !jahPassou.contains(aux)){
+							jahPassou.add(aux);
+							//System.out.println("origem: "+p.getOrigem().getNome()+" aux: "+aux);
 							ArrayList<Character> followProximo = this.getGramatica().getEstadoPorNome(p.getOrigem().getNome()).getFollow();
 							for (Character fp2 : followProximo){
 								if(!follow.contains(fp2)){
@@ -216,7 +223,8 @@ public class Estado {
 									//break;
 								}
 							}
-						} else if (posicaoAtual+1 == p.getDestino().length()){
+						} else if (posicaoAtual+1 == p.getDestino().length() && !jahPassou.contains(aux)){
+							jahPassou.add(aux);
 							ArrayList<Character> followProximo = this.getGramatica().getEstadoPorNome(p.getOrigem().getNome()).getFollowNT();
 							for (Character fp2 : followProximo){
 								if(!followNT.contains(fp2)){
