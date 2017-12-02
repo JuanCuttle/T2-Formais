@@ -86,9 +86,9 @@ public class Producao {
 				if (valor > 90 || valor == 38){
 					if (!firsts.contains(firstProducao)){
 						firsts.add(firstProducao);
-						//System.out.println(firstProducao);
+						System.out.println(firstProducao);
 					}
-					return firsts;
+					//return firsts;
 				} else if (firstProducao != this.origem.getNome().charAt(0)){
 					ArrayList<Character> firstDoEstado = gramatica.getEstadoPorNome(firstProducao.toString()).getFirst();
 					if(firstDoEstado.contains('&')){

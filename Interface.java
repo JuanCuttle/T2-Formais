@@ -6,7 +6,7 @@ public class Interface {
 
 	// Gera uma string para faciliar a visualizacao de uma gramatica
 	public static String mostraGramatica(GLC g) {
-		String gram = "Gramatica: \n";
+		String gram = "";
 		for (Estado e : g.getNaoTerminais()) {
 			if (g.getInicial() == e){
 				gram = gram + "*";
@@ -27,7 +27,7 @@ public class Interface {
 			gram = gram + "\n";
 			System.out.println("");
 		}
-		JOptionPane.showMessageDialog(null, gram);
+		//JOptionPane.showMessageDialog(null, gram);
 		gram = gram + "\n";
 		System.out.println("");
 		return gram;

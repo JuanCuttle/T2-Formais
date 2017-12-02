@@ -176,6 +176,8 @@ public class Estado {
 										followNT.add(fp);
 									}
 								}
+								
+								//System.out.println(proximo);
 								ArrayList<Character> firstsTProximo = this.getGramatica().getEstadoPorNome(proximo.toString()).getFirst();
 								
 								

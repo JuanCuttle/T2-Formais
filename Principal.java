@@ -33,8 +33,8 @@ public class Principal {
 		GLC g = new GLC(naoTerminais, terminais, producoes, S);
 		
 		
-		String string = "S -> AcAb, A-> a | &, B -> b";
-		//System.out.println(S.getFirstNT());
+		String string = "S -> AcA, A-> a | &, B -> b";
+		//System.out.println(S.getFirst());
 		
 		//System.out.println(A.getFollow());
 
@@ -115,6 +115,14 @@ public class Principal {
 			}
 		}
 		return null;
+	}
+
+	public static ArrayList<Character> firstNT(Estado e) {
+		return e.getFirstNT();
+	}
+	
+	public static ArrayList<Character> followNT(Estado e) {
+		return e.getFollowNT();
 	}
 	
 /*	public static ArrayList<Character> getFirst(int index, String palavra, ArrayList<Character> firsts, GLC gramatica) {

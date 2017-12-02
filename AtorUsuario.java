@@ -132,6 +132,54 @@ public class AtorUsuario extends JFrame {
 			}
 		});
 		mnOperaes.add(btnFollowestado);
+		
+		JButton btnFirstntestado = new JButton("FirstNT (Estado)");
+		btnFirstntestado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String confirmP;
+				int i = 0;
+				String gramaticas = "";
+				for (GLC g : Principal.gramaticasCriadas){
+					gramaticas += "\nGramatica "+i+":\n";
+					gramaticas += Interface.mostraGramatica(g);
+					i++;
+				}
+				confirmP = JOptionPane.showInputDialog(null, "Selecione a gramatica:\n"+gramaticas);
+				if (!confirmP.equals("")){
+					int escolhida = Integer.parseInt(confirmP);
+					GLC gEscolhida = Principal.gramaticasCriadas.get(escolhida);
+					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o first():");
+					ArrayList<Character> firstNT = Principal.firstNT(Principal.getEstadoPorNome(nomeEstado, gEscolhida.getNaoTerminais()));
+					JOptionPane.showMessageDialog(null, firstNT);
+					
+				}
+			}
+		});
+		mnOperaes.add(btnFirstntestado);
+		
+		JButton btnFollowntestado = new JButton("FollowNT (Estado)");
+		btnFollowntestado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String confirmP;
+				int i = 0;
+				String gramaticas = "";
+				for (GLC g : Principal.gramaticasCriadas){
+					gramaticas += "\nGramatica "+i+":\n";
+					gramaticas += Interface.mostraGramatica(g);
+					i++;
+				}
+				confirmP = JOptionPane.showInputDialog(null, "Selecione a gramatica:\n"+gramaticas);
+				if (!confirmP.equals("")){
+					int escolhida = Integer.parseInt(confirmP);
+					GLC gEscolhida = Principal.gramaticasCriadas.get(escolhida);
+					String nomeEstado = JOptionPane.showInputDialog("Digite o nome do estado a mostrar o follow():");
+					ArrayList<Character> followNT = Principal.followNT(Principal.getEstadoPorNome(nomeEstado, gEscolhida.getNaoTerminais()));
+					JOptionPane.showMessageDialog(null, followNT);
+					
+				}
+			}
+		});
+		mnOperaes.add(btnFollowntestado);
 		btnEditarGramtica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
