@@ -24,6 +24,7 @@ public class Interface {
 			// Terminaram as transicoes, imprime nova linha e reinicia o
 			// processo no
 			// proximo estado
+			gram = gram.substring(0, gram.length()-3);
 			gram = gram + "\n";
 			System.out.println("");
 		}
@@ -404,5 +405,33 @@ public class Interface {
 	public static String editaGramaticaParse(String gram){
 		String gramNova = JOptionPane.showInputDialog("Edite a gramatica: ", gram);
 		return gramNova;
+	}
+
+	public static void mostraGramaticaTela(GLC g) {
+		String gram = "Gramatica: \n";
+		for (Estado e : g.getNaoTerminais()) {
+			if (g.getInicial() == e){
+				gram = gram + "*";
+				//System.out.print("*");
+			}
+			gram = gram + e.getNome() + " -> ";
+			System.out.print(e.getNome() + " -> ");
+			for (Producao p : g.getProducoes()) {
+				if (p.getOrigem() == e) {
+					// Para cada transicao do estado, imprimir ela e " | "
+					gram = gram + p.getDestino() + " | ";
+					//System.out.print(p.getDestino() + " | ");
+				}
+			}
+			// Terminaram as transicoes, imprime nova linha e reinicia o
+			// processo no
+			// proximo estado
+			gram = gram.substring(0, gram.length()-3);
+			gram = gram + "\n";
+			//System.out.println("");
+		}
+		JOptionPane.showMessageDialog(null, gram);
+		//gram = gram + "\n";
+		//System.out.println("");
 	}
 }
